@@ -295,4 +295,50 @@ body {
     .card {
         padding: 20px;
     }
+
+    /* Ajuste do modal para celular */
+    .modal-content {
+        min-width: unset;
+        max-width: 98vw;
+        width: 100%;
+        padding: 18px 6vw;
+        box-sizing: border-box;
+    }
+}
+
+/* Centraliza o modal e escurece o fundo */
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0,0,0,0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+/* Estiliza o conteúdo do modal */
+.modal-content {
+  background: #fff;
+  padding: 32px 24px;
+  border-radius: 12px;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.15);
+  min-width: 300px;
+  max-width: 90vw;
+  text-align: center;
+}
+
+.modal-content input[type="text"] {
+  width: 90%;
+  padding: 8px;
+  margin: 6px 0 12px 0;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+}
+
+.modal-content button {
+  margin: 8px 6px 0 6px;
 }

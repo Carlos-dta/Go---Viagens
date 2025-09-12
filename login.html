@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Pet Express</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css">
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+</head>
+
+<body>
+
+    <header class="header">
+        <div class="container">
+            <h1 class="logo">🐾 Pet Ride Express</h1>
+            <p class="subtitle">Transporte seguro e confortável para seu pet</p>
+        </div>
+    </header>
+
+    <main class="main">
+        <div class="container">
+            <div class="card" style="max-width: 400px; margin: 0 auto;">
+                <h2>🔐 Entrar na sua conta</h2>
+                <form id="loginForm">
+                    <div class="input-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" required />
+                    </div>
+
+                    <div class="input-group">
+                        <label for="password">Senha</label>
+                        <input type="password" id="password" required />
+                    </div>
+
+                    <button style="margin-top: 15px;" class="btn-primary" type="submit">Entrar</button>
+                </form>
+                <p style="text-align: center; margin-top: 15px;">Não tem conta? <a href="cadastro.html">Cadastre-se</a></p>
+                <p id="errorMsg"></p>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <p>© 2024 Pet Ride Express - Cuidando do seu pet com carinho</p>
+        </div>
+        <a href="#" class="footer-link"><i class="fab fa-facebook"></i></a>
+        <a href="#" class="footer-link"><i class="fab fa-instagram"></i></a>
+        <a href="#" class="footer-link"><i class="fab fa-twitter"></i></a>
+    </footer>
+
+    <script src="login.js"></script>
+    <script src="script.js"></script>
+
+</body>
+
+</html>

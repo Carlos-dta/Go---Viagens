@@ -98,8 +98,24 @@
         <a href="#" class="footer-link"><i class="fab fa-twitter"></i></a>
     </footer>
 
+    <!-- Modal para dados do proprietário -->
+    <div id="modalProprietario" class="modal" style="display:none;">
+        <div class="modal-content">
+            <h3>Preencha seus dados</h3>
+            <div class="input-group">
+                <label>Nome: <input type="text" id="nomeProprietario" required></label>
+                <label>Telefone: <input type="tel" id="telefoneProprietario" required></label>
+                <label>Pet: <input type="text" id="petProprietario" required></label>
+                <label>Observações: <input type="text" id="obsProprietario"></label>
+            </div>
+            <button id="btnEnviarWhatsAppFinal" class="btn-primary">Enviar</button>
+            <button id="btnFecharModal" class="btn-cancelar">Cancelar</button>
+        </div>
+    </div>
+
     <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
     <script src="script.js"></script>
+    <script src="login.js"></script>
 </body>
 
 </html>

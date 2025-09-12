@@ -321,6 +321,19 @@ async function calcularViagem() {
 
 // Função para enviar para WhatsApp
 function enviarWhatsApp() {
+  // Checa se o usuário está logado
+  if (localStorage.getItem("loggedIn") !== "true") {
+    alert("Você precisa estar logado para solicitar uma corrida!");
+    window.location.href = "login.html";
+    return;
+  }
+
+  // Pega os dados do modal
+  const nome = document.getElementById("nomeProprietario").value || "[Seu nome]";
+  const telefone = document.getElementById("telefoneProprietario").value || "[Seu telefone]";
+  const pet = document.getElementById("petProprietario").value || "[Nome e tipo do pet]";
+  const obs = document.getElementById("obsProprietario").value || "[Adicionar se necessário]";
+
   const destinoNome = document.getElementById("destino").value;
   const distancia = document.getElementById("distancia").textContent;
   const preco = document.getElementById("preco").textContent;
@@ -350,10 +363,10 @@ function enviarWhatsApp() {
 🐕 Preciso de transporte para meu pet!
 
 *Dados do proprietário:*
-• Nome: [Seu nome]
-• Telefone: [Seu telefone]
-• Pet: [Nome e tipo do pet]
-• Observações: [Adicionar se necessário]
+• Nome: ${nome}
+• Telefone: ${telefone}
+• Pet: ${pet}
+• Observações: ${obs}
 
 Aguardo contato! 🚗🐾`;
 
@@ -377,7 +390,6 @@ Aguardo contato! 🚗🐾`;
   console.log("📱 Solicitação enviada para WhatsApp com links!");
 }
 
-
 // Função para cancelar
 function cancelarSolicitacao() {
   document.getElementById("confirmacao").style.display = "none";
@@ -396,6 +408,8 @@ window.addEventListener("unhandledrejection", function (event) {
   event.preventDefault(); // Previne que apareça no console como erro
 });
 
+const LOGIN_ATIVO = false;
+
 // Inicialização quando a página carregar
 document.addEventListener("DOMContentLoaded", function () {
   initMap();
@@ -410,7 +424,29 @@ document.addEventListener("DOMContentLoaded", function () {
   // Configura botões de confirmação
   const btnConfirmar = document.getElementById("btnConfirmar");
   if (btnConfirmar) {
-    btnConfirmar.addEventListener("click", enviarWhatsApp);
+    btnConfirmar.addEventListener("click", function () {
+      // Checa se está logado
+      if (localStorage.getItem("loggedIn") !== "true") {
+        alert("Você precisa estar logado para solicitar uma corrida!");
+        window.location.href = "login.html";
+        return;
+      }
+      document.getElementById("modalProprietario").style.display = "block";
+    });
+  }
+
+  // Botão de fechar modal
+  const btnFecharModal = document.getElementById("btnFecharModal");
+  if (btnFecharModal) {
+    btnFecharModal.addEventListener("click", function() {
+      document.getElementById("modalProprietario").style.display = "none";
+    });
+  }
+
+  // Botão de envio final do WhatsApp
+  const btnEnviarWhatsAppFinal = document.getElementById("btnEnviarWhatsAppFinal");
+  if (btnEnviarWhatsAppFinal) {
+    btnEnviarWhatsAppFinal.addEventListener("click", enviarWhatsApp);
   }
 
   const btnCancelar = document.getElementById("btnCancelar");
