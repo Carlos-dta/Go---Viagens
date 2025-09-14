@@ -423,6 +423,26 @@ document.addEventListener("DOMContentLoaded", function () {
     btnSimular.addEventListener("click", calcularViagem);
   }
 
+    // Atualiza preço ao marcar/desmarcar adicionais
+  const adicionais = [
+    "caixaTransporte",
+    "animalGrande",
+    "finalSemana",
+    "emergencia"
+  ];
+  adicionais.forEach(id => {
+    const checkbox = document.getElementById(id);
+    if (checkbox) {
+      checkbox.addEventListener("change", function () {
+        // Só recalcula se a confirmação estiver visível
+        if (document.getElementById("confirmacao").style.display === "block") {
+          calcularViagem();
+        }
+      });
+    }
+  });
+
+
   // Configura botões de confirmação
   const btnConfirmar = document.getElementById("btnConfirmar");
   if (btnConfirmar) {
