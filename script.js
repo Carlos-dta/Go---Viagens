@@ -321,11 +321,13 @@ async function calcularViagem() {
 
 // Função para enviar para WhatsApp
 function enviarWhatsApp() {
-  // Checa se o usuário está logado
-  if (localStorage.getItem("loggedIn") !== "true") {
-    alert("Você precisa estar logado para solicitar uma corrida!");
-    window.location.href = "login.html";
-    return;
+  if (LOGIN_ATIVO) {
+    // Checa se o usuário está logado
+    if (localStorage.getItem("loggedIn") !== "true") {
+      alert("Você precisa estar logado para solicitar uma corrida!");
+      window.location.href = "login.html";
+      return;
+    }
   }
 
   // Pega os dados do modal
@@ -425,11 +427,13 @@ document.addEventListener("DOMContentLoaded", function () {
   const btnConfirmar = document.getElementById("btnConfirmar");
   if (btnConfirmar) {
     btnConfirmar.addEventListener("click", function () {
-      // Checa se está logado
-      if (localStorage.getItem("loggedIn") !== "true") {
-        alert("Você precisa estar logado para solicitar uma corrida!");
-        window.location.href = "login.html";
-        return;
+      if (LOGIN_ATIVO) {
+        // Checa se está logado
+        if (localStorage.getItem("loggedIn") !== "true") {
+          alert("Você precisa estar logado para solicitar uma corrida!");
+          window.location.href = "login.html";
+          return;
+        }
       }
       document.getElementById("modalProprietario").style.display = "block";
     });
