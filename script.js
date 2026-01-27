@@ -52,7 +52,7 @@ function initMap() {
           .addTo(map)
           .bindPopup("🏠 Localização padrão - Vitória, ES")
           .openPopup();
-      }
+      },
     );
   } else {
     // Fallback se geolocalização não estiver disponível
@@ -139,7 +139,7 @@ function calcularRotaSimples(origem, destino) {
     origem[0],
     origem[1],
     destino[0],
-    destino[1]
+    destino[1],
   );
 
   // Cria uma rota com pontos intermediários para simular ruas
@@ -171,7 +171,7 @@ function calcularRotaSimples(origem, destino) {
 async function obterNomeRua(lat, lng) {
   try {
     const response = await fetch(
-      `https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lng}&zoom=18&addressdetails=1`
+      `https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lng}&zoom=18&addressdetails=1`,
     ).catch((err) => {
       console.log("Erro de rede ao obter endereço:", err);
       return null;
@@ -315,7 +315,7 @@ async function calcularViagem() {
   document.getElementById("confirmacao").style.display = "block";
 
   console.log(
-    `🚗 Viagem: ${resultado.distance}km - R$${preco} - ${resultado.duration}min`
+    `🚗 Viagem: ${resultado.distance}km - R$${preco} - ${resultado.duration}min`,
   );
 }
 
@@ -331,10 +331,15 @@ function enviarWhatsApp() {
   }
 
   // Pega os dados do modal
-  const nome = document.getElementById("nomeProprietario").value || "[Seu nome]";
-  const telefone = document.getElementById("telefoneProprietario").value || "[Seu telefone]";
-  const pet = document.getElementById("petProprietario").value || "[Nome e tipo do pet]";
-  const obs = document.getElementById("obsProprietario").value || "[Adicionar se necessário]";
+  const nome =
+    document.getElementById("nomeProprietario").value || "[Seu nome]";
+  const telefone =
+    document.getElementById("telefoneProprietario").value || "[Seu telefone]";
+  const pet =
+    document.getElementById("petProprietario").value || "[Nome e tipo do pet]";
+  const obs =
+    document.getElementById("obsProprietario").value ||
+    "[Adicionar se necessário]";
 
   const destinoNome = document.getElementById("destino").value;
   const distancia = document.getElementById("distancia").textContent;
@@ -423,17 +428,40 @@ document.addEventListener("DOMContentLoaded", function () {
     btnSimular.addEventListener("click", calcularViagem);
   }
 
-    // Atualiza preço ao marcar/desmarcar adicionais
+  const modalPet = document.getElementById("modalTaxaPet");
+  const btnEntendi = document.getElementById("btnEntendiPet");
+
+  // Função para fechar o modal
+  if (btnEntendi) {
+    btnEntendi.addEventListener("click", function () {
+      modalPet.style.display = "none";
+    });
+  }
+
+  // Fecha se clicar fora da bolha
+  if (modalPet) {
+    modalPet.addEventListener("click", function (e) {
+      if (e.target === modalPet) {
+        modalPet.style.display = "none";
+      }
+    });
+  }
+
+  // Atualiza preço ao marcar/desmarcar adicionais
   const adicionais = [
     "caixaTransporte",
     "animalGrande",
     "finalSemana",
-    "emergencia"
+    "emergencia",
   ];
-  adicionais.forEach(id => {
+  adicionais.forEach((id) => {
     const checkbox = document.getElementById(id);
     if (checkbox) {
       checkbox.addEventListener("change", function () {
+        if (id === "caixaTransporte" && this.checked) {
+          modalPet.style.display = "flex";
+        }
+
         // Só recalcula se a confirmação estiver visível
         if (document.getElementById("confirmacao").style.display === "block") {
           calcularViagem();
@@ -441,7 +469,6 @@ document.addEventListener("DOMContentLoaded", function () {
       });
     }
   });
-
 
   // Configura botões de confirmação
   const btnConfirmar = document.getElementById("btnConfirmar");
@@ -462,13 +489,15 @@ document.addEventListener("DOMContentLoaded", function () {
   // Botão de fechar modal
   const btnFecharModal = document.getElementById("btnFecharModal");
   if (btnFecharModal) {
-    btnFecharModal.addEventListener("click", function() {
+    btnFecharModal.addEventListener("click", function () {
       document.getElementById("modalProprietario").style.display = "none";
     });
   }
 
   // Botão de envio final do WhatsApp
-  const btnEnviarWhatsAppFinal = document.getElementById("btnEnviarWhatsAppFinal");
+  const btnEnviarWhatsAppFinal = document.getElementById(
+    "btnEnviarWhatsAppFinal",
+  );
   if (btnEnviarWhatsAppFinal) {
     btnEnviarWhatsAppFinal.addEventListener("click", enviarWhatsApp);
   }

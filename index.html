@@ -9,16 +9,17 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
     <link rel="stylesheet" href="style.css" />
+
     <head>
-    <link rel="manifest" href="./manifest.json">
-    
-    <meta name="theme-color" content="#667eea">
-    
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <meta name="apple-mobile-web-app-title" content="Pet Ride">
-    <link rel="apple-touch-icon" href="icon-192.png">
-</head>
+        <link rel="manifest" href="./manifest.json">
+
+        <meta name="theme-color" content="#667eea">
+
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+        <meta name="apple-mobile-web-app-title" content="Pet Ride">
+        <link rel="apple-touch-icon" href="icon-192.png">
+    </head>
 </head>
 
 <body>
@@ -120,6 +121,19 @@
             </div>
             <button id="btnEnviarWhatsAppFinal" class="btn-primary">Enviar</button>
             <button id="btnFecharModal" class="btn-cancelar">Cancelar</button>
+        </div>
+    </div>
+
+    <div id="modalTaxaPet" class="modal-pet-overlay" style="display: none;">
+        <div class="modal-pet-bubble">
+            <div class="pet-header-icon">
+                🐶
+            </div>
+            <h3>Proteção & Higiene</h3>
+            <p>Como o pet vai sem caixinha, adicionamos uma pequena taxa para cobrir o uso da <strong>Capa Protetora
+                    Especial</strong> no banco.</p>
+            <p class="small-text">Isso evita pelos e sujeira, mantendo o carro limpinho para todos! ✨</p>
+            <button id="btnEntendiPet" class="btn-pet-action">Entendi, tudo bem!</button>
         </div>
     </div>
 
