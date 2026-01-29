@@ -321,8 +321,8 @@ async function calcularViagem() {
 
 // Função para enviar para WhatsApp
 function enviarWhatsApp() {
-  if (LOGIN_ATIVO) {
-    // Checa se o usuário está logado
+  // --- 1. Lógica de Login (PRESERVADA) ---
+  if (typeof LOGIN_ATIVO !== 'undefined' && LOGIN_ATIVO) {
     if (localStorage.getItem("loggedIn") !== "true") {
       alert("Você precisa estar logado para solicitar uma corrida!");
       window.location.href = "login.html";
@@ -330,46 +330,69 @@ function enviarWhatsApp() {
     }
   }
 
-  // Pega os dados do modal
-  const nome =
-    document.getElementById("nomeProprietario").value || "[Seu nome]";
-  const telefone =
-    document.getElementById("telefoneProprietario").value || "[Seu telefone]";
-  const pet =
-    document.getElementById("petProprietario").value || "[Nome e tipo do pet]";
-  const obs =
-    document.getElementById("obsProprietario").value ||
-    "[Adicionar se necessário]";
+  // --- 2. Coleta de Dados do Formulário (PRESERVADA) ---
+  const nome = document.getElementById("nomeProprietario").value || "Não informado";
+  const telefone = document.getElementById("telefoneProprietario").value || "Não informado";
+  const pet = document.getElementById("petProprietario").value || "Não informado";
+  const obs = document.getElementById("obsProprietario").value || "Nenhuma";
 
+  // --- 3. Lógica do Agendamento (NOVO - INSERIDO AQUI) ---
+  const dataAgendamentoInput = document.getElementById("agendamento").value;
+  let textoAgendamento = "🔴 IMEDIATO (Agora)"; // Padrão
+
+  if (dataAgendamentoInput) {
+      const dataObj = new Date(dataAgendamentoInput);
+      const dia = dataObj.getDate().toString().padStart(2, '0');
+      const mes = (dataObj.getMonth() + 1).toString().padStart(2, '0');
+      const hora = dataObj.getHours().toString().padStart(2, '0');
+      const min = dataObj.getMinutes().toString().padStart(2, '0');
+      
+      textoAgendamento = `🗓️ Agendado para: ${dia}/${mes} às ${hora}:${min}`;
+  }
+
+  // --- 4. Dados da Corrida (PRESERVADO) ---
   const destinoNome = document.getElementById("destino").value;
   const distancia = document.getElementById("distancia").textContent;
   const preco = document.getElementById("preco").textContent;
 
-  // Coordenadas
+  // --- 5. Adicionais (CHECKBOXES - INSERIDO AQUI) ---
+  // Verifica o que foi marcado para somar na mensagem
+  let adicionaisMsg = "";
+  if(document.getElementById("caixaTransporte")?.checked) adicionaisMsg += " • Sem Caixa (Capa Protetora)\n";
+  if(document.getElementById("animalGrande")?.checked) adicionaisMsg += " • Animal Grande\n";
+  if(document.getElementById("emergencia")?.checked) adicionaisMsg += " • Taxa Emergência\n";
+  if(document.getElementById("finalSemana")?.checked) adicionaisMsg += " • Final de Semana\n";
+  
+  if (adicionaisMsg === "") adicionaisMsg = " • Nenhum adicional";
+
+  // --- 6. Coordenadas e Links (PRESERVADO EXATAMENTE COMO O SEU) ---
   const origemLat = startPoint[0];
   const origemLng = startPoint[1];
   const destinoLat = endPoint[0];
   const destinoLng = endPoint[1];
 
-  // Links do Google Maps
   const linkOrigem = `https://www.google.com/maps?q=${origemLat},${origemLng}`;
   const linkRota = `https://www.google.com/maps/dir/${origemLat},${origemLng}/${destinoLat},${destinoLng}`;
 
-  // Número do WhatsApp da Pet Ride Express
   const numeroWhatsApp = "5527996338749";
 
-  // Monta a mensagem com links clicáveis
+  // --- 7. Montagem da Mensagem (MESCLADA) ---
+  // Aqui juntamos o seu texto antigo com as variáveis novas (Agendamento e Adicionais)
   const mensagem = `🐾 *Pet Ride Express* - Solicitação de Corrida
+
+⏰ *${textoAgendamento}*
 
 📍 *Destino:* ${destinoNome}
 📏 *Distância:* ${distancia} km
 💰 *Valor estimado:* R$ ${preco}
+
+➕ *Adicionais:*
+${adicionaisMsg}
+
 📌 *Localização atual:* [Abrir no mapa](${linkOrigem})
 🗺️ *Rota completa:* [Abrir no Google Maps](${linkRota})
 
-🐕 Preciso de transporte para meu pet!
-
-*Dados do proprietário:*
+🐕 *Dados do proprietário:*
 • Nome: ${nome}
 • Telefone: ${telefone}
 • Pet: ${pet}
@@ -377,24 +400,22 @@ function enviarWhatsApp() {
 
 Aguardo contato! 🚗🐾`;
 
-  // Codifica a mensagem para URL
+  // --- 8. Finalização (PRESERVADO + FECHAR MODAL NOVO) ---
   const mensagemCodificada = encodeURIComponent(mensagem);
-
-  // Cria o link do WhatsApp
   const linkWhatsApp = `https://wa.me/${numeroWhatsApp}?text=${mensagemCodificada}`;
 
-  // Abre o WhatsApp
   window.open(linkWhatsApp, "_blank");
 
-  // Atualiza status
+  // Atualiza status visual
   document.getElementById("status").textContent = "Enviado para WhatsApp!";
   document.getElementById("status").style.background = "#e8f5e8";
   document.getElementById("status").style.color = "#2e7d32";
 
-  // Esconde confirmação
+  // Esconde TUDO (Confirmação antiga E o Modal Novo)
   document.getElementById("confirmacao").style.display = "none";
+  document.getElementById("modalProprietario").style.display = "none";
 
-  console.log("📱 Solicitação enviada para WhatsApp com links!");
+  console.log("📱 Solicitação enviada com Agendamento e Adicionais!");
 }
 
 // Função para cancelar
@@ -506,4 +527,69 @@ document.addEventListener("DOMContentLoaded", function () {
   if (btnCancelar) {
     btnCancelar.addEventListener("click", cancelarSolicitacao);
   }
+});
+
+document.addEventListener("DOMContentLoaded", function () {
+  // --- 1. LÓGICA DO MENU LATERAL (GAVETA) ---
+  const menuBtn = document.getElementById("menuBtn");
+  const sideMenu = document.getElementById("sideMenu");
+  const closeMenu = document.getElementById("closeMenu");
+  const overlay = document.getElementById("menuOverlay");
+
+  // Função que abre ou fecha o menu
+  function toggleMenu() {
+    if (sideMenu && overlay) {
+      sideMenu.classList.toggle("open");
+      overlay.classList.toggle("show");
+    }
+  }
+
+  // Eventos de clique para abrir/fechar
+  if (menuBtn) menuBtn.addEventListener("click", toggleMenu);
+  if (closeMenu) closeMenu.addEventListener("click", toggleMenu);
+  if (overlay) overlay.addEventListener("click", toggleMenu);
+
+  // --- 2. LÓGICA DO MODAL TUTORIAL ---
+  const linkTutorial = document.getElementById("linkTutorial");
+  const modalTutorial = document.getElementById("modalTutorial");
+  const closeTutorial = document.getElementById("closeTutorial");
+
+  if (linkTutorial) {
+    linkTutorial.addEventListener("click", function (e) {
+      e.preventDefault(); // Evita pular pro topo da página
+      toggleMenu(); // Fecha o menu lateral
+      if (modalTutorial) modalTutorial.style.display = "block"; // Abre o modal
+    });
+  }
+
+  if (closeTutorial) {
+    closeTutorial.addEventListener("click", function () {
+      modalTutorial.style.display = "none";
+    });
+  }
+
+  // --- 3. LÓGICA DO MODAL PWA (INSTALAR) ---
+  const linkPWA = document.getElementById("linkPWA");
+  const modalPWA = document.getElementById("modalPWA");
+  const closePWA = document.getElementById("closePWA");
+
+  if (linkPWA) {
+    linkPWA.addEventListener("click", function (e) {
+      e.preventDefault();
+      toggleMenu(); // Fecha o menu lateral
+      if (modalPWA) modalPWA.style.display = "block"; // Abre o modal
+    });
+  }
+
+  if (closePWA) {
+    closePWA.addEventListener("click", function () {
+      modalPWA.style.display = "none";
+    });
+  }
+
+  // --- 4. FECHAR QUALQUER MODAL AO CLICAR FORA ---
+  window.addEventListener("click", function (e) {
+    if (e.target == modalTutorial) modalTutorial.style.display = "none";
+    if (e.target == modalPWA) modalPWA.style.display = "none";
+  });
 });
