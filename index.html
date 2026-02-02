@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pet Ride Express</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <link rel="stylesheet" href="style.css" />
+
+    <head>
+        <link rel="manifest" href="./manifest.json">
+
+        <meta name="theme-color" content="#667eea">
+
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+        <meta name="apple-mobile-web-app-title" content="Pet Ride">
+        <link rel="apple-touch-icon" href="icon-192.png">
+    </head>
+</head>
+
+<body>
+    <header class="header" style="position: relative;">
+        <button id="menuBtn" class="hamburger-icon"
+            style="position: absolute; left: 20px; top: 50%; transform: translateY(-50%); background: none; border: none; color: #ff6b6b; font-size: 32px; cursor: pointer; z-index: 1001;">☰</button>
+
+        <div class="container">
+            <h1 class="logo">🐾 Pet Ride Express</h1>
+            <p class="subtitle">Transporte seguro e confortável para seu pet</p>
+        </div>
+    </header>
+
+    <nav id="sideMenu" class="side-menu">
+        <div class="menu-header">
+            <span>Menu</span>
+            <button id="closeMenu" class="close-btn">&times;</button>
+        </div>
+        <ul>
+            <li><a href="#" id="linkTutorial">📖 Como Usar (Tutorial)</a></li>
+            <li><a href="#" id="linkPWA">📲 Instalar App</a></li>
+        </ul>
+    </nav>
+
+    <div id="menuOverlay" class="menu-overlay"></div>
+
+    <div id="modalTutorial" class="modal">
+        <div class="modal-content tutorial-content">
+            <span class="close" id="closeTutorial">&times;</span>
+            <h2 style="color: #667eea;">🗺️ Como pedir sua corrida</h2>
+
+            <div class="step">
+                <p><strong>1. Escolha o Destino:</strong> Toque no mapa exatamente no local para onde você quer levar o
+                    animal.</p>
+                <img src="Tmapa.png" style="width: 100%; border-radius: 8px; margin-top: 10px; border: 1px solid #ccc;">
+            </div>
+
+            <div class="step">
+                <p><strong>2. Calcule o Valor:</strong> Clique no botão <strong>"Calcular Preço"</strong> (ou Simular)
+                    para ver a distância e o custo da viagem.</p>
+                <img src="Tpreco.png"
+                    style="width: 100%; border-radius: 8px; margin-top: 10px; border: 1px solid #ccc;">
+            </div>
+
+            <div class="step">
+                <p><strong>3. Confirme o Pedido:</strong> Preencha seus dados, marque se precisa de capa/transporte e
+                    clique em <strong>"Chamar no WhatsApp"</strong>.</p>
+                <img src="Tzap.png" style="width: 100%; border-radius: 8px; margin-top: 10px; border: 1px solid #ccc;">
+            </div>
+        </div>
+    </div>
+
+    <div id="modalPWA" class="modal">
+        <div class="modal-content">
+            <span class="close" id="closePWA">&times;</span>
+            <h2 style="color: #667eea;">📲 Instalar no Celular</h2>
+            <div style="margin-top: 20px;">
+                <p style="margin-bottom: 10px;"><strong>🤖 Android:</strong> Toque nos 3 pontinhos > <strong>Adicionar à
+                        tela inicial</strong>.</p>
+                <hr style="border: 0; border-top: 1px solid #eee; margin: 15px 0;">
+                <p><strong>🍎 iPhone:</strong> Toque em Compartilhar > <strong>Adicionar à Tela de Início</strong>.</p>
+            </div>
+        </div>
+    </div>
+
+    <main class="main">
+        <div class="container">
+            <div class="app-grid">
+                <div class="control-panel">
+                    <div class="card">
+                        <h2>📍 Solicitar Corrida</h2>
+                        <div class="input-group">
+                            <label for="destino">Para onde vamos?</label>
+                            <input type="text" id="destino" placeholder="Clique no mapa para escolher o destino"
+                                readonly />
+                            <button id="btnSimular" class="btn-primary"><i class="fas fa-car"></i> Calcular Viagem
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="card info-card">
+                        <h3>📊 Informações da Viagem</h3>
+                        <div class="info-grid">
+                            <div class="info-item">
+                                <span class="info-label">Distância:</span>
+                                <span class="info-value" id="distancia">--</span> km
+                            </div>
+                            <div class="info-item">
+                                <span class="info-label">Valor:</span>
+                                <span class="info-value">R$ <span id="preco">--</span> </span>
+                            </div>
+                            <div class="info-item">
+                                <span class="info-label">Status:</span>
+                                <span class="info-value status"><span id="status">Aguardando...</span>
+                            </div>
+                        </div>
+
+                        <div id="confirmacao" class="confirmacao-section" style="display: none;">
+
+                            <h4 class="confirmacao-texto">Possui adicionais?</h4>
+
+                            <label><input type="checkbox" id="caixaTransporte"> Animal sem caixa (+R$5)</label><br>
+                            <label><input type="checkbox" id="animalGrande"> Animal de grande porte (+R$10)</label><br>
+
+                            <label>
+                                <input type="checkbox" id="finalSemana">
+                                Final de semana ou feriado (+R$5)
+                            </label><br>
+
+                            <label>
+                                <input type="checkbox" id="emergencia">
+                                Corrida de emergência (menos de 2h antes) (+R$10)
+                            </label>
+
+                            <h4>🐾 Confirmar solicitação?</h4>
+                            <p class="confirmacao-texto">Enviar pedido de corrida para o WhatsApp?</p>
+                            <div class="confirmacao-buttons">
+                                <button id="btnConfirmar" class="btn-whatsapp">📱Sim, enviar
+                                </button>
+                                <button id="btnCancelar" class="btn-cancelar">❌Cancelar</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="map-container">
+                    <div id="map" class="map"></div>
+                    <div class="map-overlay">
+                        <p>🎯 Clique no mapa para escolher o destino</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <p>© 2024 Pet Ride Express - Cuidando do seu pet com carinho</p>
+        </div>
+        <a href="#" class="footer-link"><i class="fab fa-facebook"></i></a>
+        <a href="#" class="footer-link"><i class="fab fa-instagram"></i></a>
+        <a href="#" class="footer-link"><i class="fab fa-twitter"></i></a>
+    </footer>
+
+    <!-- Modal para dados do proprietário -->
+    <div id="modalProprietario" class="modal" style="display:none;">
+        <div class="modal-content pet-form-card">
+            <span class="close" id="btnFecharModal">&times;</span>
+
+            <div class="pet-form-header">
+                🐶 <span>Dados da Viagem</span>
+            </div>
+
+            <div class="input-group-pet">
+                <label>📅 Para quando é?</label>
+                <input type="datetime-local" id="agendamento" class="input-pet">
+                <small style="color: #666; font-size: 0.8em;">Deixe em branco se for para AGORA.</small>
+            </div>
+
+            <div class="input-group-pet">
+                <label>👤 Seu Nome</label>
+                <input type="text" id="nomeProprietario" class="input-pet" placeholder="Ex: Carlos" required>
+            </div>
+
+            <div class="input-group-pet">
+                <label>📱 WhatsApp</label>
+                <input type="tel" id="telefoneProprietario" class="input-pet" placeholder="(00) 00000-0000" required>
+            </div>
+
+            <div class="input-group-pet">
+                <label>🐾 Nome e Raça do Pet</label>
+                <input type="text" id="petProprietario" class="input-pet" placeholder="Ex: Rex (Labrador)" required>
+            </div>
+
+            <div class="input-group-pet">
+                <label>📝 Alguma observação?</label>
+                <textarea id="obsProprietario" class="input-pet" rows="2"
+                    placeholder="Ex: O pet é bravo, levar petisco..."></textarea>
+            </div>
+
+            <button id="btnEnviarWhatsAppFinal" class="btn-primary btn-pet-send">
+                Chamar Motorista 🚗
+            </button>
+        </div>
+    </div>
+
+    <div id="modalTaxaPet" class="modal-pet-overlay" style="display: none;">
+        <div class="modal-pet-bubble">
+            <div class="pet-header-icon">
+                🐶
+            </div>
+            <h3>Proteção & Higiene</h3>
+            <p>Como o pet vai sem caixinha, adicionamos uma pequena taxa para cobrir o uso da <strong>Capa Protetora
+                    Especial</strong> no banco.</p>
+            <p class="small-text">Isso evita pelos e sujeira, mantendo o carro limpinho para todos! ✨</p>
+            <button id="btnEntendiPet" class="btn-pet-action">Entendi, tudo bem!</button>
+        </div>
+    </div>
+
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    <script src="script.js"></script>
+    <script src="login.js"></script>
+</body>
+
+</html>

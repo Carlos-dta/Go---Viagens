@@ -1,0 +1,717 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family:
+    "Poppins",
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    Roboto,
+    sans-serif;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  min-height: 100vh;
+  color: #333;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+/* Header */
+.header {
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  padding: 20px 0;
+  text-align: center;
+}
+
+.logo {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #ff6b6b;
+  margin-bottom: 10px;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.subtitle {
+  font-size: 1.1rem;
+  color: #666;
+  font-weight: 600;
+}
+
+.main {
+  padding: 40px 0;
+  flex: 1;
+}
+
+.app-grid {
+  display: grid;
+  grid-template-columns: 400px 1fr;
+  gap: 30px;
+  align-items: start;
+}
+
+.card {
+  background: white;
+  border-radius: 20px;
+  padding: 30px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.card h2 {
+  font-size: 1.5rem;
+  margin-bottom: 20px;
+  color: #333;
+  font-weight: 600;
+}
+
+.card h3 {
+  font-size: 1.2rem;
+  margin-bottom: 15px;
+  color: #333;
+  font-weight: 600;
+}
+
+.input-group {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.input-group label {
+  font-weight: 500;
+  color: #555;
+  font-size: 1rem;
+}
+
+.input-group input {
+  padding: 15px 20px;
+  border: 2px solid #e1e8ed;
+  border-radius: 12px;
+  font-size: 1em;
+  transition: all 0.3s ease;
+  background: #f8f9fa;
+}
+
+.input-group input:focus {
+  outline: none;
+  border-color: #ff6b6b;
+  background: white;
+  box-shadow: 0 0 0 3px rgba(255, 107, 107, 0.1);
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, #ff6b6b, #ff5252);
+  color: white;
+  border: none;
+  padding: 15px 25px;
+  border-radius: 12px;
+  font-size: 1.1em;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(255, 107, 107, 0.3);
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(255, 107, 107, 0.4);
+}
+
+.btn-primary:active {
+  transform: translateY(0);
+}
+
+.info-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.info-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 0;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.info-item:last-child {
+  border-bottom: none;
+}
+
+.info-label {
+  font-weight: 500;
+  color: #666;
+}
+
+.info-value {
+  font-weight: 600;
+  color: #333;
+  font-size: 1.1em;
+}
+
+.status {
+  padding: 6px 12px;
+  border-radius: 20px;
+  background: #e3f2fd;
+  color: #1976d2;
+  font-size: 0.9em;
+}
+
+.confirmacao-section {
+  /* display: block !important; */
+  margin-top: 20px;
+  padding: 20px;
+  background: #f8f9fa;
+  border-radius: 12px;
+  border: 2px solid #e1e8ed;
+  text-align: center;
+}
+
+.confirmacao-section h4 {
+  margin: 0 0 10px 0;
+  color: #333;
+  font-size: 1.2em;
+}
+
+.confirmacao-texto {
+  color: #666;
+  margin-bottom: 20px;
+  font-size: 1em;
+}
+
+.confirmacao-buttons {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.confirmacao-texto {
+  color: #666;
+  margin-bottom: 20px;
+  font-size: 1em;
+}
+
+.btn-whatsapp {
+  background: linear-gradient(135deg, #25d366, #20c653);
+  color: white;
+  border: none;
+  padding: 12px 20px;
+  border-radius: 10px;
+  font-size: 1em;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(37, 211, 102, 0.3);
+}
+
+.btn-whatsapp:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(37, 211, 102, 0.4);
+}
+
+.btn-cancelar {
+  background: linear-gradient(135deg, #6c757d, #5a6268);
+  color: white;
+  border: none;
+  padding: 12px 20px;
+  border-radius: 10px;
+  font-size: 1em;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(108, 117, 125, 0.3);
+}
+
+.btn-cancelar:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(108, 117, 125, 0.4);
+}
+
+.map-container {
+  position: relative;
+  height: 600px;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+.map {
+  width: 100%;
+  height: 100%;
+  border-radius: 20px;
+}
+
+.map-overlay {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background: rgba(255, 255, 255, 0.9);
+  padding: 10px 15px;
+  border-radius: 10px;
+  font-size: 0.9em;
+  font-weight: 500;
+  color: #333;
+  z-index: 1000;
+}
+
+.footer {
+  background: rgba(255, 255, 255, 0.9);
+  padding: 20px 0;
+  text-align: center;
+  color: #666;
+  font-size: 0.9em;
+}
+
+.user-marker,
+.destination-marker {
+  background: transparent;
+  border: none;
+  font-size: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@media (max-width: 768px) {
+  .app-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .map-container {
+    height: 400px;
+  }
+
+  .logo {
+    font-size: 2em;
+  }
+
+  .card {
+    padding: 20px;
+  }
+
+  /* Ajuste do modal para celular */
+  .modal-content {
+    min-width: unset;
+    max-width: 98vw;
+    width: 100%;
+    padding: 18px 6vw;
+    box-sizing: border-box;
+  }
+}
+
+/* Centraliza o modal e escurece o fundo */
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+/* Estiliza o conteúdo do modal */
+.modal-content {
+  background: #fff;
+  padding: 32px 24px;
+  border-radius: 12px;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.15);
+  min-width: 300px;
+  max-width: 90vw;
+  text-align: center;
+}
+
+.modal-content input[type="text"] {
+  width: 90%;
+  padding: 8px;
+  margin: 6px 0 12px 0;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+}
+
+.modal-content button {
+  margin: 8px 6px 0 6px;
+}
+
+/* Fundo escuro atrás do modal */
+.modal-pet-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(102, 126, 234, 0.6); /* Roxo translúcido */
+  backdrop-filter: blur(4px); /* Desfoque no fundo */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 2000;
+}
+
+/* O Modal Redondo (Bolha) */
+.modal-pet-bubble {
+  background: white;
+  width: 320px;
+  padding: 40px 30px 30px 30px;
+  border-radius: 40px; /* Bem arredondado */
+  text-align: center;
+  position: relative;
+  box-shadow:
+    0 15px 35px rgba(50, 50, 93, 0.2),
+    0 5px 15px rgba(0, 0, 0, 0.17);
+  border: 4px solid #fff;
+
+  /* A Mágica da Animação de "Estourar" */
+  animation: popIn 0.5s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+}
+
+/* O ícone do cachorro saindo pra fora */
+.pet-header-icon {
+  position: absolute;
+  top: -40px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: linear-gradient(135deg, #ff6b6b, #ff8e8e);
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 40px;
+  box-shadow: 0 5px 15px rgba(255, 107, 107, 0.4);
+  border: 4px solid white;
+}
+
+.modal-pet-bubble h3 {
+  margin-top: 20px;
+  color: #667eea;
+  font-size: 1.4rem;
+  margin-bottom: 15px;
+}
+
+.modal-pet-bubble p {
+  color: #666;
+  font-size: 0.95rem;
+  line-height: 1.5;
+  margin-bottom: 15px;
+}
+
+.modal-pet-bubble .small-text {
+  font-size: 0.85rem;
+  color: #999;
+  margin-bottom: 25px;
+}
+
+.btn-pet-action {
+  background: #667eea;
+  color: white;
+  border: none;
+  padding: 12px 30px;
+  border-radius: 25px; /* Botão pílula */
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: transform 0.2s;
+  width: 100%;
+}
+
+.btn-pet-action:hover {
+  transform: scale(1.05);
+  background: #5a67d8;
+}
+
+/* A Animação Keyframes */
+@keyframes popIn {
+  0% {
+    transform: scale(0);
+    opacity: 0;
+  }
+  80% {
+    transform: scale(1.1);
+    opacity: 1;
+  } /* Vai um pouco além do tamanho */
+  100% {
+    transform: scale(1);
+  } /* Volta ao normal (efeito elástico) */
+}
+
+/* --- MENU LATERAL (GAVETA) --- */
+.side-menu {
+    position: fixed;
+    top: 0;
+    left: -280px; /* Começa escondido */
+    width: 280px;
+    height: 100%;
+    background: white;
+    box-shadow: 2px 0 10px rgba(0,0,0,0.2);
+    transition: left 0.3s ease; /* Animação suave */
+    z-index: 2000;
+    display: flex;
+    flex-direction: column;
+}
+
+.side-menu.open {
+    left: 0; /* Aparece na tela */
+}
+
+/* Cabeçalho do Menu (Verde) */
+.menu-header {
+    background: #4CAF50; /* Mesma cor do seu tema */
+    color: white;
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+
+.close-btn {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 28px;
+    cursor: pointer;
+    padding: 0 5px;
+}
+
+/* Lista de Links */
+.side-menu ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.side-menu li a {
+    display: block;
+    padding: 15px 20px;
+    text-decoration: none;
+    color: #333;
+    border-bottom: 1px solid #eee;
+    font-size: 1rem;
+    font-weight: 500;
+}
+
+.side-menu li a:active {
+    background: #f0f0f0;
+}
+
+/* Fundo Escuro (Overlay) */
+.menu-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.5);
+    z-index: 1999;
+    display: none;
+}
+
+.menu-overlay.show {
+    display: block;
+}
+
+/* --- ESTILOS DO TUTORIAL --- */
+.tutorial-content {
+    max-height: 85vh; /* Evita que o modal fique maior que a tela */
+    overflow-y: auto; /* Permite rolar se for longo */
+}
+
+.step {
+    background: #f8f9fa;
+    border: 1px solid #e9ecef;
+    border-radius: 12px;
+    padding: 15px;
+    margin-bottom: 20px;
+}
+
+.step p {
+    margin-bottom: 10px;
+    color: #444;
+}
+
+/* Caixa cinza onde vão ficar os prints */
+.print-placeholder {
+    width: 100%;
+    height: 120px;
+    background: #e2e8f0;
+    border: 2px dashed #cbd5e0;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #718096;
+    font-size: 0.9rem;
+    font-style: italic;
+}
+
+/* --- CORREÇÃO: Esconder Modais ao Iniciar --- */
+#modalTutorial,
+#modalPWA {
+    display: none; /* O SEGREDO: Isso faz eles começarem invisíveis */
+    
+    /* Garante que fiquem na frente de tudo quando abrirem */
+    position: fixed; 
+    z-index: 3000; 
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto; 
+    background-color: rgba(0,0,0,0.6); /* Fundo preto transparente */
+}
+
+/* Garante que a caixinha branca fique bonita */
+.modal-content {
+    background-color: #fff;
+    margin: 10% auto; /* 10% do topo e centralizado */
+    padding: 20px;
+    border: 1px solid #888;
+    width: 90%; /* Ocupa boa parte da tela do celular */
+    max-width: 500px; /* Mas não fica gigante no PC */
+    border-radius: 15px; /* Bordas arredondadas */
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    position: relative;
+}
+
+/* O "X" de fechar */
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+/* --- ESTILO DO FORMULÁRIO FOFO (CORRIGIDO) --- */
+
+/* O cartão branco do formulário */
+.pet-form-card {
+  border-radius: 25px !important;
+  padding: 25px !important;
+  border: 4px solid #e0e7ff; /* Borda azulzinha suave */
+  box-shadow: 0 10px 25px rgba(102, 126, 234, 0.2);
+  
+  /* --- CORREÇÃO IMPORTANTE AQUI --- */
+  /* 1. Trava a altura em 80% da tela */
+  max-height: 80vh !important; 
+  
+  /* 2. Cria barra de rolagem se precisar */
+  overflow-y: auto !important; 
+  
+  /* 3. Centraliza e define largura segura */
+  width: 90% !important;
+  max-width: 450px !important;
+  margin: 20px auto !important;
+  display: block !important;
+}
+
+/* Ajuste extra para celulares muito pequenos deitados */
+@media (max-height: 600px) {
+    .pet-form-card {
+        max-height: 70vh !important;
+    }
+}
+
+/* Cabeçalho com ícone */
+.pet-form-header {
+  text-align: center;
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #667eea;
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+/* Grupos de input */
+.input-group-pet {
+  margin-bottom: 15px;
+  text-align: left;
+}
+
+.input-group-pet label {
+  display: block;
+  font-weight: 600;
+  color: #555;
+  margin-bottom: 5px;
+  font-size: 0.9rem;
+}
+
+/* Os campos de digitar (Inputs) */
+.input-pet {
+  width: 100%;
+  padding: 12px 15px;
+  border: 2px solid #eee;
+  border-radius: 12px;
+  font-size: 1rem;
+  background-color: #f9f9fc;
+  transition: all 0.3s ease;
+  outline: none;
+  font-family: inherit;
+  box-sizing: border-box; /* Garante que o padding não estoure a largura */
+}
+
+/* Efeito quando clica no campo */
+.input-pet:focus {
+  border-color: #667eea;
+  background-color: #fff;
+  box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.1);
+}
+
+/* Ajuste no botão de fechar (X) */
+#btnFecharModal {
+  position: absolute;
+  right: 20px;
+  top: 15px;
+  background: #f0f0f0;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  text-align: center;
+  line-height: 30px;
+  color: #666;
+  font-size: 20px;
+  cursor: pointer;
+  z-index: 10; /* Garante que fique clicável */
+}
+
+/* Botão de Enviar */
+.btn-pet-send {
+  width: 100%;
+  border-radius: 12px;
+  padding: 15px;
+  font-size: 1.1rem;
+  font-weight: bold;
+  margin-top: 10px;
+  box-shadow: 0 4px 15px rgba(76, 175, 80, 0.3);
+  cursor: pointer;
+}
