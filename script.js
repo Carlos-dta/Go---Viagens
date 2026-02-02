@@ -593,6 +593,7 @@ document.addEventListener("DOMContentLoaded", function () {
     if (e.target == modalPWA) modalPWA.style.display = "none";
   });
 });
+<<<<<<< HEAD
 
 // --- LÓGICA VISUAL DO AGENDAMENTO (Pode colar no final do script.js) ---
 const inputAgendamento = document.getElementById("agendamento");
@@ -620,3 +621,5 @@ if (inputAgendamento && divStatus) {
         }
     });
 }
+=======
+>>>>>>> 275d72e6c93d4bdc50579728590133187cf92bd3

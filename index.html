@@ -166,45 +166,44 @@
 
     <!-- Modal para dados do proprietário -->
     <div id="modalProprietario" class="modal" style="display:none;">
-        <div class="modal-content pet-form-card">
-            <span class="close" id="btnFecharModal">&times;</span>
-
-            <div class="pet-form-header">
-                🐶 <span>Dados da Viagem</span>
-            </div>
-
-            <div class="input-group-pet">
-                <label>📅 Para quando é?</label>
-                <input type="datetime-local" id="agendamento" class="input-pet">
-                <small style="color: #666; font-size: 0.8em;">Deixe em branco se for para AGORA.</small>
-            </div>
-
-            <div class="input-group-pet">
-                <label>👤 Seu Nome</label>
-                <input type="text" id="nomeProprietario" class="input-pet" placeholder="Ex: Carlos" required>
-            </div>
-
-            <div class="input-group-pet">
-                <label>📱 WhatsApp</label>
-                <input type="tel" id="telefoneProprietario" class="input-pet" placeholder="(00) 00000-0000" required>
-            </div>
-
-            <div class="input-group-pet">
-                <label>🐾 Nome e Raça do Pet</label>
-                <input type="text" id="petProprietario" class="input-pet" placeholder="Ex: Rex (Labrador)" required>
-            </div>
-
-            <div class="input-group-pet">
-                <label>📝 Alguma observação?</label>
-                <textarea id="obsProprietario" class="input-pet" rows="2"
-                    placeholder="Ex: O pet é bravo, levar petisco..."></textarea>
-            </div>
-
-            <button id="btnEnviarWhatsAppFinal" class="btn-primary btn-pet-send">
-                Chamar Motorista 🚗
-            </button>
+    <div class="modal-content pet-form-card">
+        <span class="close" id="btnFecharModal">&times;</span>
+        
+        <div class="pet-form-header">
+            🐶 <span>Dados da Viagem</span>
         </div>
+
+        <div class="input-group-pet">
+            <label>📅 Para quando é?</label>
+            <input type="datetime-local" id="agendamento" class="input-pet">
+            <small style="color: #666; font-size: 0.8em;">Deixe em branco se for para AGORA.</small>
+        </div>
+
+        <div class="input-group-pet">
+            <label>👤 Seu Nome</label>
+            <input type="text" id="nomeProprietario" class="input-pet" placeholder="Ex: Carlos" required>
+        </div>
+
+        <div class="input-group-pet">
+            <label>📱 WhatsApp</label>
+            <input type="tel" id="telefoneProprietario" class="input-pet" placeholder="(00) 00000-0000" required>
+        </div>
+
+        <div class="input-group-pet">
+            <label>🐾 Nome e Raça do Pet</label>
+            <input type="text" id="petProprietario" class="input-pet" placeholder="Ex: Rex (Labrador)" required>
+        </div>
+
+        <div class="input-group-pet">
+            <label>📝 Alguma observação?</label>
+            <textarea id="obsProprietario" class="input-pet" rows="2" placeholder="Ex: O pet é bravo, levar petisco..."></textarea>
+        </div>
+
+        <button id="btnEnviarWhatsAppFinal" class="btn-primary btn-pet-send">
+            Chamar Motorista 🚗
+        </button>
     </div>
+</div>
 
     <div id="modalTaxaPet" class="modal-pet-overlay" style="display: none;">
         <div class="modal-pet-bubble">
